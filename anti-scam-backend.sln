@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31129.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "anti-scam-backend", "anti-scam-backend\anti-scam-backend.csproj", "{B6B569E1-C495-402B-915C-44913A84155B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6B569E1-C495-402B-915C-44913A84155B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B569E1-C495-402B-915C-44913A84155B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6B569E1-C495-402B-915C-44913A84155B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6B569E1-C495-402B-915C-44913A84155B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B685BAB-47E0-4422-B9B0-7E6D6D7BAC9D}
+	EndGlobalSection
+EndGlobal
