@@ -15,6 +15,10 @@ namespace anti_scam_backend.Features.Users
             CreateMap<User, Login.UserModel>()
                 .ForMember(des => des.TotalPosts, opt => opt.MapFrom(src => src.Posts.Count()))
                 .ForMember(des => des.IsAuth, opt => opt.MapFrom(src => src.IsActive));
+
+            //Detail query
+            CreateMap<User, Detail.UserProfile>()
+                .ForMember(d => d.TotalPosts, o => o.MapFrom(s => s.Posts.Count));
         }
     }
 }

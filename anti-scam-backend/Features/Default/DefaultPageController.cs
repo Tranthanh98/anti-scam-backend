@@ -18,9 +18,10 @@ namespace anti_scam_backend.Features.Default
         {
             _mediator = mediator;
         }
-        public async Task<ResponseModel<Default.Queries.DefaultReport.DefaultReportModel>> GetReportDefaultData()
+        [HttpGet("{kindOf}")]
+        public async Task<ResponseModel<Default.Queries.DefaultReport.DefaultReportModel>> GetReportDefaultData(int kindOf)
         {
-            var result = await _mediator.Send(new Default.Queries.DefaultReport.Query(), default);
+            var result = await _mediator.Send(new Default.Queries.DefaultReport.Query() { KindOf = kindOf}, default);
             return result;
         }
     }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using anti_scam_backend.Domain.Infrastructure;
 
 namespace anti_scam_backend.Migrations
 {
     [DbContext(typeof(AntiScamContext))]
-    partial class AntiScamContextModelSnapshot : ModelSnapshot
+    [Migration("20210530103142_AddHighlightField")]
+    partial class AddHighlightField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

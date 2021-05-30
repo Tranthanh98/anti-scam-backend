@@ -20,6 +20,7 @@ namespace anti_scam_backend.Domain.Entities
         public EKindOf? KindOf { get; set; }
         public string Link { get; set; }
         public bool? IsActive { get; set; }
+        public bool? IsHighlight { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<TypePost> TypePosts { get; set; }
         public virtual User User { get; set; }
