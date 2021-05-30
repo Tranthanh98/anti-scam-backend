@@ -12,7 +12,7 @@ namespace anti_scam_backend.Domain.Infrastructure.Configuration
     {
         public void Configure(EntityTypeBuilder<TypePost> builder)
         {
-            builder.HasKey(i => new { i.PostId, i.TypeId });
+            builder.HasKey(i => i.Id);
             builder.HasOne(i => i.Posts)
                 .WithMany(i => i.TypePosts)
                 .OnDelete(DeleteBehavior.ClientSetNull)

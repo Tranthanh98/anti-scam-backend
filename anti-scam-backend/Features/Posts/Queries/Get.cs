@@ -55,6 +55,7 @@ namespace anti_scam_backend.Features.Posts.Queries
             public async Task<ResponseModel<Pagination<PostModel>>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var posts = _context.Posts
+                    .AsNoTracking()
                     .Where(i=> (int)i.KindOf == request.SearchModel.KindOfValue)
                     .Include(i=> i.User)
                     .Include(i=> i.Comments)
@@ -65,7 +66,8 @@ namespace anti_scam_backend.Features.Posts.Queries
                 {
                     posts = posts.Where(
                         i => i.Title.Contains(request.SearchModel.SearchText) ||
-                        i.TypePosts.Select(m => m.Object).Contains(request.SearchModel.SearchText));
+                        i.TypePosts.Select(m => m.Object).Any(c => c.Contains(request.SearchModel.SearchText)));
+                    var a = await posts.ToListAsync();
                 }
                 if(request.SearchModel.TypeId != default)
                 {

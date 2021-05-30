@@ -31,7 +31,8 @@ namespace anti_scam_backend.Features.Files
         {
             var baseUrl = Request.Host.Value;
             StringValues userId;
-            HttpContext.Request.Headers.TryGetValue("UserId", out userId);
+            Request.Headers.TryGetValue("X-UserId", out userId);
+
             var schema = Request.Scheme;
             var command = new UploadFile.Command()
             {

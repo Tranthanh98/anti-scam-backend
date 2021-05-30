@@ -55,7 +55,8 @@ namespace anti_scam_backend
             });
             services.AddDbContext<AntiScamContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("AntiScamContext"));
+                options.EnableSensitiveDataLogging()
+                .UseSqlServer(Configuration.GetConnectionString("AntiScamContext"));
             });
             //authentication
             var key = Encoding.ASCII.GetBytes(Settings.Secret);

@@ -19,6 +19,14 @@ namespace anti_scam_backend.Features.Posts
                 .ForMember(des => des.ReviewNumber, opt => opt.MapFrom(src => src.View))
                 .ForMember(des => des.KindOf, o => o.MapFrom(s => (int)s.KindOf))
                 .ForMember(des => des.TotalComment, o => o.MapFrom(s => s.Comments.Count()));
+
+            CreateMap<Domain.Entities.Posts, Detail.DetailPost>()
+                .ForMember(des => des.KindOfName, opt => opt.MapFrom(i => EnumHelper.GetDescription((EKindOf)i.KindOf)))
+                .ForMember(des => des.Writer, opt => opt.MapFrom(src => src.User.UserName))
+                .ForMember(des => des.ReviewNumber, opt => opt.MapFrom(src => src.View))
+                .ForMember(des => des.KindOf, o => o.MapFrom(s => (int)s.KindOf))
+                .ForMember(des => des.TotalComment, o => o.MapFrom(s => s.Comments.Count()));
+                //.ForMember(des => des.ImageList, o => o.MapFrom(s => s.Images.Select(i=> "/api/file/getfilebyid/"+i.Id)));
         }
     }
 }

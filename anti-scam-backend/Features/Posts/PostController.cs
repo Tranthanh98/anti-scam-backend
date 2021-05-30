@@ -32,9 +32,20 @@ namespace anti_scam_backend.Features.Posts
             return result;
         }
         [HttpPost]
-        public async Task<ResponseModel<Pagination<Queries.Get.PostModel>>> GetPosts (Queries.Get.Query query)
+        public async Task<ResponseModel<Pagination<Queries.Get.PostModel>>> GetPosts(Queries.Get.Query query)
         {
             var result = await _mediator.Send(query, default);
+            return result;
+        }
+        [HttpGet("{id}")]
+        public async Task<ResponseModel<Queries.Detail.DetailPost>> Detail(Guid id)
+        {
+            var baseUrl = Request.Host.Value;
+            StringValues userId;
+            Request.Headers.TryGetValue("X-UserId", out userId);
+
+            var schema = Request.Scheme;
+            var result = await _mediator.Send(new Queries.Detail.Query() { BaseUrl = schema + "://" + baseUrl, PostId = id });
             return result;
         }
     }
