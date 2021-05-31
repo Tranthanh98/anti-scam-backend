@@ -69,5 +69,11 @@ namespace anti_scam_backend.Features.Users
             var result = await _mediator.Send(command, default);
             return result;
         }
+        [HttpPost]
+        public async Task<ResponseModel> ResetPassword (ResetPassword.Command command)
+        {
+            var result = await _mediator.Send(command, default);
+            return result;
+        }
     }
 }
