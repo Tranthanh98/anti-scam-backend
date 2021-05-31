@@ -63,7 +63,8 @@ namespace anti_scam_backend.Features.Posts.Command
                     {
                         Object = i.Object,
                         TypeId = i.TypeId,
-                    }).ToList()
+                    }).ToList(),
+                    IsHighlight = false
                 };
                 var imgList = _context.FileAttachments.Where(i => i.CreatedBy == userId && request.ImageIds.Contains(i.Id));
 

@@ -1,5 +1,6 @@
 ﻿using anti_scam_backend.Domain.Infrastructure;
 using anti_scam_backend.Model;
+using anti_scam_backend.Services.Helper;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -61,19 +62,21 @@ namespace anti_scam_backend.Features.Posts.Queries
                     .Include(i=> i.Comments)
                     .Include(i => i.TypePosts)
                     .ThenInclude(i => i.Type)
-                    .AsQueryable();
-                if (!String.IsNullOrEmpty(request.SearchModel.SearchText))
-                {
-                    posts = posts.Where(
-                        i => i.Title.Contains(request.SearchModel.SearchText) ||
-                        i.TypePosts.Select(m => m.Object).Any(c => c.Contains(request.SearchModel.SearchText)));
-                    var a = await posts.ToListAsync();
-                }
-                if(request.SearchModel.TypeId != default)
+                    .AsEnumerable();
+
+                if (request.SearchModel.TypeId != default)
                 {
                     posts = posts.Where(i => i.TypePosts.Select(i => i.TypeId).Contains(request.SearchModel.TypeId));
                 }
-                var data = await posts.Skip(request.SearchModel.Skip()).Take(request.SearchModel.PageSize).ToListAsync();
+                if (!String.IsNullOrEmpty(request.SearchModel.SearchText))
+                {
+                    var requestSearchText = StringHelper.RemoveVietNameTone(request.SearchModel.SearchText);
+                    posts = posts.Where(
+                        i => StringHelper.RemoveVietNameTone(i.Title).Contains(requestSearchText) ||
+                        i.TypePosts.Select(m => StringHelper.RemoveVietNameTone(m.Object)).Any(c => c.Contains(requestSearchText)));
+                }
+                
+                var data = posts.Skip(request.SearchModel.Skip()).Take(request.SearchModel.PageSize).ToList();
 
                 if((int)request.SearchModel.SortType == (int)SortOrder.Ascending)
                 {

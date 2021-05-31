@@ -44,6 +44,14 @@ namespace anti_scam_backend.Features.Comments.Command
                         Messages = new List<string>() { "Người dùng không hợp lệ" }
                     };
                 }
+                if(String.IsNullOrEmpty(request.Content))
+                {
+                    return new ResponseModel<Get.CommentModel>()
+                    {
+                        IsSuccess = false,
+                        Messages = new List<string>() { "Bình luận không được để trống" }
+                    };
+                }
                 //add comment
                 var comment = _mapper.Map<Domain.Entities.Comment>(request);
                 _context.Comments.Add(comment);
