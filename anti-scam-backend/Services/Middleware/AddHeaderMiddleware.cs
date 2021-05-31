@@ -19,6 +19,7 @@ namespace anti_scam_backend.Services.Middleware
         public async Task InvokeAsync(HttpContext context)
         {
             var userId = context.User.Claims.FirstOrDefault(i => i.Type == ClaimTypes.NameIdentifier);
+            var test = context.User.Claims.ToList();
             if(userId != null)
             {
                 context.Request.Headers.Add("X-UserId", userId.Value);

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using anti_scam_backend.Domain.Infrastructure;
 
 namespace anti_scam_backend.Migrations
 {
     [DbContext(typeof(AntiScamContext))]
-    partial class AntiScamContextModelSnapshot : ModelSnapshot
+    [Migration("20210531142148_AddStatusPost")]
+    partial class AddStatusPost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,9 +99,6 @@ namespace anti_scam_backend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AcceptedById")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid?>("CreatedById")
                         .HasColumnType("uniqueidentifier");
 
@@ -129,8 +128,6 @@ namespace anti_scam_backend.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AcceptedById");
 
                     b.HasIndex("CreatedById");
 
@@ -186,22 +183,22 @@ namespace anti_scam_backend.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("9be6c423-9beb-4f9f-a779-d95fea720573"),
+                            UserId = new Guid("4a78990a-99a0-4d52-bb7f-a673980cb3d2"),
                             RoldId = 1
                         },
                         new
                         {
-                            UserId = new Guid("9be6c423-9beb-4f9f-a779-d95fea720573"),
+                            UserId = new Guid("4a78990a-99a0-4d52-bb7f-a673980cb3d2"),
                             RoldId = 2
                         },
                         new
                         {
-                            UserId = new Guid("e9467e36-91ec-49b4-9013-4ff7cfbcfb19"),
+                            UserId = new Guid("53badd43-670c-4b69-a4de-e6df33199cd3"),
                             RoldId = 1
                         },
                         new
                         {
-                            UserId = new Guid("e9467e36-91ec-49b4-9013-4ff7cfbcfb19"),
+                            UserId = new Guid("53badd43-670c-4b69-a4de-e6df33199cd3"),
                             RoldId = 2
                         });
                 });
@@ -306,24 +303,24 @@ namespace anti_scam_backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("9be6c423-9beb-4f9f-a779-d95fea720573"),
+                            Id = new Guid("4a78990a-99a0-4d52-bb7f-a673980cb3d2"),
                             CodeValidate = "123456",
                             Email = "Trantienthanh2412@gmail.com",
                             IsActive = true,
                             IsAdmin = true,
-                            JoinedDate = new DateTimeOffset(new DateTime(2021, 5, 31, 14, 52, 24, 125, DateTimeKind.Unspecified).AddTicks(7588), new TimeSpan(0, 0, 0, 0, 0)),
+                            JoinedDate = new DateTimeOffset(new DateTime(2021, 5, 31, 14, 21, 46, 911, DateTimeKind.Unspecified).AddTicks(3669), new TimeSpan(0, 0, 0, 0, 0)),
                             Password = "AQAAAAEAACcQAAAAEBAPlUdwTj0sci7gABciifU0cXR+sD/GUUtK99iAzlEcmqzuCE4Z8TflzHN9Nv6+KQ==",
                             Salt = "pscznq",
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("e9467e36-91ec-49b4-9013-4ff7cfbcfb19"),
+                            Id = new Guid("53badd43-670c-4b69-a4de-e6df33199cd3"),
                             CodeValidate = "123456",
                             Email = "antiscam.contact@gmail.comm",
                             IsActive = true,
                             IsAdmin = true,
-                            JoinedDate = new DateTimeOffset(new DateTime(2021, 5, 31, 14, 52, 24, 126, DateTimeKind.Unspecified).AddTicks(1183), new TimeSpan(0, 0, 0, 0, 0)),
+                            JoinedDate = new DateTimeOffset(new DateTime(2021, 5, 31, 14, 21, 46, 911, DateTimeKind.Unspecified).AddTicks(7309), new TimeSpan(0, 0, 0, 0, 0)),
                             Password = "AQAAAAEAACcQAAAAEBAPlUdwTj0sci7gABciifU0cXR+sD/GUUtK99iAzlEcmqzuCE4Z8TflzHN9Nv6+KQ==",
                             Salt = "pscznq",
                             UserName = "Admin"
@@ -373,15 +370,9 @@ namespace anti_scam_backend.Migrations
 
             modelBuilder.Entity("anti_scam_backend.Domain.Entities.Posts", b =>
                 {
-                    b.HasOne("anti_scam_backend.Domain.Entities.User", "Accepted")
-                        .WithMany("PostsAccepted")
-                        .HasForeignKey("AcceptedById");
-
                     b.HasOne("anti_scam_backend.Domain.Entities.User", "User")
                         .WithMany("Posts")
                         .HasForeignKey("CreatedById");
-
-                    b.Navigation("Accepted");
 
                     b.Navigation("User");
                 });
@@ -451,8 +442,6 @@ namespace anti_scam_backend.Migrations
                     b.Navigation("FileAttachments");
 
                     b.Navigation("Posts");
-
-                    b.Navigation("PostsAccepted");
 
                     b.Navigation("RoleAdmins");
                 });

@@ -22,6 +22,8 @@ namespace anti_scam_backend.Domain.Infrastructure
         public DbSet<User> Users { get; set; }
         public DbSet<FileAttachment> FileAttachments { get; set; }
         public DbSet<FileAttachmentData> FileAttachmentDatas { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<RoleAdmin> RoleAdmins { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +33,11 @@ namespace anti_scam_backend.Domain.Infrastructure
             modelBuilder.ApplyConfiguration(new TypePostsConfigEntities());
             modelBuilder.ApplyConfiguration(new UserConfigEntities());
             modelBuilder.ApplyConfiguration(new FileAttachmentConfigEntities());
+
+            modelBuilder.ApplyConfiguration(new RoleAdminConfigEntities());
+            modelBuilder.ApplyConfiguration(new RoleConfigEntities());
+
+
             modelBuilder.Entity<FileAttachmentData>(option =>
                 option.HasKey(i => i.FileId)
             );

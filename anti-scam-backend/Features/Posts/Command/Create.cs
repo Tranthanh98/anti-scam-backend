@@ -54,7 +54,7 @@ namespace anti_scam_backend.Features.Posts.Command
                     CreatedById = userId,
                     CreatedDate = DateTimeOffset.UtcNow,
                     Description = request.Description,
-                    IsActive = false,
+                    Status = EStatusPost.WatingAccept,
                     KindOf = (EKindOf)request.KindOf,
                     Link = link,
                     Title = request.Title,

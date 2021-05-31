@@ -16,12 +16,15 @@ namespace anti_scam_backend.Domain.Entities
         public string Email { get; set; }
         public string Password { get; set; }
         public string Salt { get; set; }
-        public bool? IsActive { get; set; }
         public bool? IsActive { get; set; } = true;
         public string CodeValidate { get; set; }
+        public bool IsAdmin { get; set; } = false;
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Posts> Posts { get; set; }
         public virtual ICollection<FileAttachment> FileAttachments { get; set; }
+        public virtual ICollection<RoleAdmin> RoleAdmins { get; set; }
+
+        public virtual ICollection<Posts> PostsAccepted { get; set; }
 
     }
 }

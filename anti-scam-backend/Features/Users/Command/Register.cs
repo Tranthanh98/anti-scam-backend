@@ -74,7 +74,8 @@ namespace anti_scam_backend.Features.Users.Command
                     Password = hashPw,
                     Salt = salt,
                     UserName = request.UserName,
-                    CodeValidate = codeValidate
+                    CodeValidate = codeValidate,
+                    IsAdmin = false
                 };
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();

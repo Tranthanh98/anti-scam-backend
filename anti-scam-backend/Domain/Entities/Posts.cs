@@ -19,12 +19,16 @@ namespace anti_scam_backend.Domain.Entities
         public int? View { get; set; }
         public EKindOf? KindOf { get; set; }
         public string Link { get; set; }
-        public bool? IsActive { get; set; }
+        public EStatusPost Status { get; set; } = EStatusPost.WatingAccept;
         public bool? IsHighlight { get; set; }
+
+        public Guid? AcceptedById { get; set; }
+        
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<TypePost> TypePosts { get; set; }
         public virtual User User { get; set; }
         public virtual ICollection<FileAttachment> Images { get; set; }
+        public virtual User Accepted { get; set; }
 
     }
 }

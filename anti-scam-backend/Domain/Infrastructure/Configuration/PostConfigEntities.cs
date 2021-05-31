@@ -27,6 +27,11 @@ namespace anti_scam_backend.Domain.Infrastructure.Configuration
                 .WithMany(i => i.Posts)
                 .HasForeignKey(i => i.CreatedById)
                 .OnDelete(DeleteBehavior.ClientSetNull);
+
+            builder.HasOne(i => i.Accepted)
+                .WithMany(i => i.PostsAccepted)
+                .HasForeignKey(i => i.AcceptedById)
+                .OnDelete(DeleteBehavior.ClientSetNull);
         }
     }
 }

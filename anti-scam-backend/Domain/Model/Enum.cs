@@ -14,4 +14,15 @@ namespace anti_scam_backend.Domain.Model
         [Display(Description ="Lừa đảo")]
         Cheat = 2,
     }
+
+    public enum EStatusPost : int
+    {
+        Undefined = 0,
+        [Display(Description = "Chờ duyệt")]
+        WatingAccept = 1,
+        [Display(Description = "Đã duyệt")]
+        Accepted = 2,
+        [Display(Description = "Từ chối duyệt")]
+        Denied = 3
+    }
 }
