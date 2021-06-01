@@ -2,6 +2,7 @@
 using anti_scam_backend.Domain.Infrastructure;
 using anti_scam_backend.Domain.Model;
 using anti_scam_backend.Model;
+using anti_scam_backend.Services.Helper;
 using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -63,7 +64,7 @@ namespace anti_scam_backend.Features.PostManager.Queries
                     .Include(i => i.Accepted)
                     .Include(i => i.TypePosts)
                     .ThenInclude(i => i.Type)
-                    .AsQueryable();
+                    .AsEnumerable();
 
                 if (request.SearchModel.TypeId != default)
                 {
@@ -79,7 +80,15 @@ namespace anti_scam_backend.Features.PostManager.Queries
                     posts = posts.Where(i => i.Status == (EStatusPost)request.SearchModel.StatusId);
                 }
 
-                var data = await posts.Skip(request.SearchModel.Skip()).Take(request.SearchModel.PageSize).ToListAsync();
+                if (!String.IsNullOrEmpty(request.SearchModel.SearchText))
+                {
+                    var str = StringHelper.RemoveVietNameTone(request.SearchModel.SearchText.ToLower());
+                    posts = posts.Where(i=> StringHelper.RemoveVietNameTone(i.Title.ToLower()).Contains(str)||
+                                            i.User.Email.ToLower().Contains(str)
+                    );
+                }
+
+                var data = posts.Skip(request.SearchModel.Skip()).Take(request.SearchModel.PageSize).ToList();
 
                 var result = _mapper.Map<List<PostModel>>(data);
 

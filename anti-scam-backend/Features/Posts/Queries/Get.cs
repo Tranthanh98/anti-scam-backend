@@ -70,10 +70,10 @@ namespace anti_scam_backend.Features.Posts.Queries
                 }
                 if (!String.IsNullOrEmpty(request.SearchModel.SearchText))
                 {
-                    var requestSearchText = StringHelper.RemoveVietNameTone(request.SearchModel.SearchText);
+                    var requestSearchText = StringHelper.RemoveVietNameTone(request.SearchModel.SearchText.ToLower());
                     posts = posts.Where(
-                        i => StringHelper.RemoveVietNameTone(i.Title).Contains(requestSearchText) ||
-                        i.TypePosts.Select(m => StringHelper.RemoveVietNameTone(m.Object)).Any(c => c.Contains(requestSearchText)));
+                        i => StringHelper.RemoveVietNameTone(i.Title.ToLower()).Contains(requestSearchText) ||
+                        i.TypePosts.Select(m => StringHelper.RemoveVietNameTone(m.Object.ToLower())).Any(c => c.Contains(requestSearchText)));
                 }
                 
                 var data = posts.Skip(request.SearchModel.Skip()).Take(request.SearchModel.PageSize).ToList();

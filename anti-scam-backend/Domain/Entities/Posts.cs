@@ -23,6 +23,8 @@ namespace anti_scam_backend.Domain.Entities
         public bool? IsHighlight { get; set; }
 
         public Guid? AcceptedById { get; set; }
+
+        public DateTimeOffset? AcceptedDate { get; set; }
         
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<TypePost> TypePosts { get; set; }

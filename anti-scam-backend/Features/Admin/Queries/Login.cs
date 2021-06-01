@@ -49,6 +49,7 @@ namespace anti_scam_backend.Features.Admin.Queries
             public async Task<ResponseModel<AuthenticationModel>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var ack = new ResponseModel<AuthenticationModel>();
+                var t = await _context.Users.ToListAsync();
                 var user = await _context.Users
                     .AsNoTracking()
                     .Include(i => i.Posts)
