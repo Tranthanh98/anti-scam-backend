@@ -84,8 +84,14 @@ namespace anti_scam_backend.Features.PostManager.Queries
                 {
                     var str = StringHelper.RemoveVietNameTone(request.SearchModel.SearchText.ToLower());
                     posts = posts.Where(i=> StringHelper.RemoveVietNameTone(i.Title.ToLower()).Contains(str)||
-                                            i.User.Email.ToLower().Contains(str)
+                                            i.User.Email.ToLower().Contains(str) ||
+                                            i.Id.ToString().ToLower().Contains(str)
                     );
+                }
+
+                if (request.SearchModel.PageSize == default)
+                {
+                    request.SearchModel.PageSize = 10;
                 }
 
                 var data = posts.Skip(request.SearchModel.Skip()).Take(request.SearchModel.PageSize).ToList();
@@ -99,7 +105,8 @@ namespace anti_scam_backend.Features.PostManager.Queries
                     {
                         CurrentPage = request.SearchModel.CurrentPage,
                         Total = posts.Count(),
-                        Data = result
+                        Data = result,
+                        PageSize = request.SearchModel.PageSize
                     }
                 };
 

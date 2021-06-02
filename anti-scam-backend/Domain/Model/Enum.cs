@@ -25,4 +25,13 @@ namespace anti_scam_backend.Domain.Model
         [Display(Description = "Từ chối duyệt")]
         Denied = 3
     }
+
+    public enum EStatusAdmin : int
+    {
+        Undefined = 0,
+        [Display(Description = "Hoạt động")]
+        Acitve = 1,
+        [Display(Description = "Ngừng hoạt động")]
+        InActive = 2,
+    }
 }
