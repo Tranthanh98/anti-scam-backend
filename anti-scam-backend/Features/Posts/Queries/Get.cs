@@ -57,11 +57,12 @@ namespace anti_scam_backend.Features.Posts.Queries
             {
                 var posts = _context.Posts
                     .AsNoTracking()
-                    .Where(i=> (int)i.KindOf == request.SearchModel.KindOfValue)
+                    .Where(i=> (int)i.KindOf == request.SearchModel.KindOfValue && i.Status == Domain.Model.EStatusPost.Accepted)
                     .Include(i=> i.User)
                     .Include(i=> i.Comments)
                     .Include(i => i.TypePosts)
                     .ThenInclude(i => i.Type)
+                    .OrderByDescending(i=> i.CreatedDate)
                     .AsEnumerable();
 
                 if (request.SearchModel.TypeId != default)
@@ -97,6 +98,7 @@ namespace anti_scam_backend.Features.Posts.Queries
                         CurrentPage = request.SearchModel.CurrentPage,
                         Total = posts.Count(),
                         Data = result,
+                        PageSize = request.SearchModel.PageSize
                     }
                 };
                 

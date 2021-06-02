@@ -18,7 +18,7 @@ namespace anti_scam_backend.Model
             }
         }
         public int Total { get; set; }
-        public int PageSize { get; set; } = 5;
+        public int PageSize { get; set; }
         public int Skip()
         {
             if (this.CurrentPage <= 1)

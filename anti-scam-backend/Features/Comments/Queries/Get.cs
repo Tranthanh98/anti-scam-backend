@@ -22,12 +22,10 @@ namespace anti_scam_backend.Features.Comments.Queries
             public string Content { get; set; }
             public Guid? PostId { get; set; }
         }
-        public class Query : IRequest<ResponseModel<Pagination<CommentModel>>>
+        public class Query : Pagination, IRequest<ResponseModel<Pagination<CommentModel>>>
         {
             [FromBody]
             public Guid PostId { get; set; }
-            [FromBody]
-            public int CurrentPage { get; set; }
         }
         public class Handler : IRequestHandler<Query, ResponseModel<Pagination<CommentModel>>>
         {
@@ -40,21 +38,28 @@ namespace anti_scam_backend.Features.Comments.Queries
             }
             public async Task<ResponseModel<Pagination<CommentModel>>> Handle(Query request, CancellationToken cancellationToken)
             {
-                var comments = await _context.Comments
+                var comments = _context.Comments
                     .AsNoTracking()
-                    .Include(i=> i.User)
-                    .Where(i => i.PostId == request.PostId)
-                    .ToListAsync(cancellationToken);
+                    .Include(i => i.User)
+                    .OrderByDescending(i=> i.CreatedDate)
+                    .Where(i => i.PostId == request.PostId).AsQueryable();
 
-                var data = _mapper.Map<List<CommentModel>>(comments);
+                if (request.PageSize == default)
+                {
+                    request.PageSize = 10;
+                }
+                var result = await comments.Skip(request.Skip()).Take(request.PageSize).ToListAsync(cancellationToken);
+                var data = _mapper.Map<List<CommentModel>>(result);
+
                 return new ResponseModel<Pagination<CommentModel>>()
                 {
                     IsSuccess = true,
                     Data = new Pagination<CommentModel>()
                     {
                         CurrentPage = request.CurrentPage,
-                        Total = data.Count(),
-                        Data = data
+                        Total = comments.Count(),
+                        Data = data,
+                        PageSize = request.PageSize
                     }
                 };
             }
