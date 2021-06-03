@@ -69,5 +69,15 @@ namespace anti_scam_backend.Features.PostManager
             var result = await _mediator.Send(new Disabled.Command() { PostId = id, UserId = userId });
             return result;
         }
+        [HttpPost]
+        [Authorize(Roles = "ContentManger")]
+        public async Task<ResponseModel> Create(Create.Command command)
+        {
+            StringValues userId;
+            Request.Headers.TryGetValue("X-UserId", out userId);
+            command.UserId = userId;
+            var result = await _mediator.Send(command, default);
+            return result;
+        }
     }
 }

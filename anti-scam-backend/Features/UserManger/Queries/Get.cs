@@ -52,6 +52,9 @@ namespace anti_scam_backend.Features.UserManger.Queries
                 var users = _context.Users
                     .AsNoTracking()
                     .Where(i=> i.IsAdmin == request.IsAdmin)
+                    .Include(i=>i.RoleAdmins)
+                    .ThenInclude(i=> i.Role)
+                    .OrderByDescending(i=> i.JoinedDate)
                     .AsEnumerable();
                 if(request.StatusId != EStatusAdmin.Undefined)
                 {
@@ -72,7 +75,9 @@ namespace anti_scam_backend.Features.UserManger.Queries
                 if (!String.IsNullOrEmpty(request.SearchText))
                 {
                     var str = StringHelper.RemoveVietNameTone(request.SearchText);
-                    users = users.Where(i => i.Email.Contains(str) || StringHelper.RemoveVietNameTone(i.UserName).Contains(str));
+                    users = users.Where(i => i.Email.Contains(str) || 
+                                            StringHelper.RemoveVietNameTone(i.UserName).Contains(str)||
+                                            i.Id.ToString().ToLower().Contains(str));
                 }
 
                 if(request.PageSize == default)

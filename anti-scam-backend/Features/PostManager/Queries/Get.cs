@@ -64,6 +64,7 @@ namespace anti_scam_backend.Features.PostManager.Queries
                     .Include(i => i.Accepted)
                     .Include(i => i.TypePosts)
                     .ThenInclude(i => i.Type)
+                    .OrderByDescending(i=> i.CreatedDate)
                     .AsEnumerable();
 
                 if (request.SearchModel.TypeId != default)

@@ -19,6 +19,7 @@ namespace anti_scam_backend.Domain.Entities
         public bool? IsActive { get; set; } = true;
         public string CodeValidate { get; set; }
         public bool IsAdmin { get; set; } = false;
+        public string CreateBy { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Posts> Posts { get; set; }
         public virtual ICollection<FileAttachment> FileAttachments { get; set; }

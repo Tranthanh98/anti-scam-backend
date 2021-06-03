@@ -2,18 +2,16 @@
 using anti_scam_backend.Domain.Model;
 using anti_scam_backend.Model;
 using anti_scam_backend.Services.Helper;
-using anti_scam_backend.Services.Middleware;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace anti_scam_backend.Features.Posts.Command
+namespace anti_scam_backend.Features.PostManager.Command
 {
     public static class Create
     {
@@ -49,48 +47,54 @@ namespace anti_scam_backend.Features.Posts.Command
                 var ack = new ResponseModel();
                 Guid userId;
                 Guid.TryParse(request.UserId, out userId);
-                if(userId == default)
+                if (userId == default)
                 {
                     ack.Messages.Add("UserId không hợp lệ");
                     return ack;
                 }
                 var user = await _context.Users.FirstOrDefaultAsync(i => i.Id == userId);
-                if(user == null)
+                if (user == null)
                 {
-                    ack.Messages.Add("UserId không hợp lệ");
+                    ack.Messages.Add("Tài khoản không hợp lệ");
                     return ack;
                 }
-                var link = PostHelper.CreateLinkPost(request.Title);
-                var post = new Domain.Entities.Posts()
+                if(user.IsAdmin && (bool)user.IsActive)
                 {
-                    Id = Guid.NewGuid(),
-                    CreatedById = user.Id,
-                    CreatedDate = DateTimeOffset.UtcNow,
-                    Description = request.Description,
-                    Status = EStatusPost.WatingAccept,
-                    KindOf = EKindOf.Cheat,
-                    Link = link,
-                    Title = request.Title,
-                    View = 0,
-                    TypePosts = request.TypePostList.Select(i => new Domain.Entities.TypePost()
+                    var link = PostHelper.CreateLinkPost(request.Title);
+                    var post = new Domain.Entities.Posts()
                     {
-                        Object = i.Object,
-                        TypeId = i.TypeId,
-                    }).ToList(),
-                    IsHighlight = false,
-                };
-                var imgList = _context.FileAttachments.Where(i => i.CreatedBy == userId && request.ImageIds.Contains(i.Id));
+                        Id = Guid.NewGuid(),
+                        CreatedById = userId,
+                        CreatedDate = DateTimeOffset.UtcNow,
+                        Description = request.Description,
+                        Status = EStatusPost.Accepted,
+                        KindOf = (EKindOf)request.KindOf,
+                        Link = link,
+                        Title = request.Title,
+                        View = 0,
+                        TypePosts = request.TypePostList.Select(i => new Domain.Entities.TypePost()
+                        {
+                            Object = i.Object,
+                            TypeId = i.TypeId,
+                        }).ToList(),
+                        IsHighlight = false,
+                        AcceptedById = user.Id,
+                        AcceptedDate = DateTimeOffset.UtcNow
+                    };
+                    var imgList = _context.FileAttachments.Where(i => i.CreatedBy == userId && request.ImageIds.Contains(i.Id));
 
-                post.Images = imgList.ToList();
-                _context.Posts.Add(post);
+                    post.Images = imgList.ToList();
+                    _context.Posts.Add(post);
 
-                await _context.SaveChangesAsync();
+                    await _context.SaveChangesAsync();
 
-                return new ResponseModel()
-                {
-                    IsSuccess = true
-                };
-                
+                    return new ResponseModel()
+                    {
+                        IsSuccess = true
+                    };
+
+                }
+                return new ResponseModel() { IsSuccess = false };
             }
         }
     }

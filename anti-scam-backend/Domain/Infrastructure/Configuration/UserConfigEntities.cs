@@ -30,7 +30,7 @@ namespace anti_scam_backend.Domain.Infrastructure.Configuration
                 new User()
                 {
                     Id = Settings.UserIdAdmin,
-                    Email = "antiscam.contact@gmail.comm",
+                    Email = "antiscam.contact@gmail.com",
                     IsActive = true,
                     JoinedDate = DateTimeOffset.UtcNow,
                     IsAdmin = true,

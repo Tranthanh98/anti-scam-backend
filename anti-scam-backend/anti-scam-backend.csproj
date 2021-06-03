@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>anti_scam_backend</RootNamespace>
+    <UserSecretsId>333b378e-98e8-4988-b4a5-2de1584f2e94</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
