@@ -74,9 +74,9 @@ namespace anti_scam_backend.Features.UserManger.Queries
                 }
                 if (!String.IsNullOrEmpty(request.SearchText))
                 {
-                    var str = StringHelper.RemoveVietNameTone(request.SearchText);
-                    users = users.Where(i => i.Email.Contains(str) || 
-                                            StringHelper.RemoveVietNameTone(i.UserName).Contains(str)||
+                    var str = StringHelper.RemoveVietNameTone(request.SearchText).ToLower();
+                    users = users.Where(i => i.Email.ToLower().Contains(str) || 
+                                            StringHelper.RemoveVietNameTone(i.UserName).ToLower().Contains(str)||
                                             i.Id.ToString().ToLower().Contains(str));
                 }
 

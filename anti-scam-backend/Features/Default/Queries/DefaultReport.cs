@@ -38,11 +38,13 @@ namespace anti_scam_backend.Features.Default.Queries
             public async Task<ResponseModel<DefaultReportModel>> Handle(Query request, CancellationToken cancellationToken)
             {
                 var types = await _context.Types.ToListAsync(cancellationToken);
-                var newestPosts = await _context.Posts.Where(i=> i.KindOf == (EKindOf)request.KindOf && (bool)i.IsHighlight).ToListAsync(cancellationToken);
+                var newestPosts = await _context.Posts
+                                .Where(i=> i.KindOf == (EKindOf)request.KindOf && (bool)i.IsHighlight && i.Status == EStatusPost.Accepted)
+                                .ToListAsync(cancellationToken);
 
                 if(newestPosts.Count == 0)
                 {
-                    newestPosts = await _context.Posts.Where(i => i.KindOf == (EKindOf)request.KindOf).OrderBy(i=> i.CreatedDate).Take(5).ToListAsync(cancellationToken);
+                    newestPosts = await _context.Posts.Where(i => i.KindOf == (EKindOf)request.KindOf && i.Status == EStatusPost.Accepted).OrderBy(i=> i.CreatedDate).Take(5).ToListAsync(cancellationToken);
                 }
                 var ack = new ResponseModel<DefaultReportModel>();
 

@@ -18,6 +18,8 @@ namespace anti_scam_backend.Model
     }
     public class Selectable<T> : Selectable
     {
+        public Selectable() : base() { }
+        public Selectable(string value, string label) : base(value, label) { }
         public T Data { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using anti_scam_backend.Features.Posts.Command;
+using anti_scam_backend.Features.Posts.Queries;
 using anti_scam_backend.Model;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -9,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static anti_scam_backend.Features.Posts.Queries.Search;
 
 namespace anti_scam_backend.Features.Posts
 {
@@ -46,6 +48,13 @@ namespace anti_scam_backend.Features.Posts
 
             var schema = Request.Scheme;
             var result = await _mediator.Send(new Queries.Detail.Query() { BaseUrl = schema + "://" + baseUrl, PostId = id });
+            return result;
+        }
+
+        [HttpGet("{searchText}")]
+        public async Task<ResponseModel<List<SearchResponseModel>>> Search(string searchText)
+        {
+            var result = await _mediator.Send(new Search.Query() { SearchText = searchText }, default);
             return result;
         }
     }

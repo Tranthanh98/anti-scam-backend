@@ -60,21 +60,22 @@ namespace anti_scam_backend.Features.Posts.Command
                     ack.Messages.Add("UserId không hợp lệ");
                     return ack;
                 }
+
                 var link = PostHelper.CreateLinkPost(request.Title);
                 var post = new Domain.Entities.Posts()
                 {
                     Id = Guid.NewGuid(),
                     CreatedById = user.Id,
                     CreatedDate = DateTimeOffset.UtcNow,
-                    Description = request.Description,
+                    Description = StringHelper.RemoveBadWord(request.Description),
                     Status = EStatusPost.WatingAccept,
                     KindOf = EKindOf.Cheat,
                     Link = link,
-                    Title = request.Title,
+                    Title = StringHelper.RemoveBadWord(request.Title),
                     View = 0,
                     TypePosts = request.TypePostList.Select(i => new Domain.Entities.TypePost()
                     {
-                        Object = i.Object,
+                        Object = StringHelper.RemoveBadWord(i.Object),
                         TypeId = i.TypeId,
                     }).ToList(),
                     IsHighlight = false,

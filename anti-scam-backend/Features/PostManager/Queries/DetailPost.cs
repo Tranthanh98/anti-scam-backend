@@ -22,6 +22,7 @@ namespace anti_scam_backend.Features.PostManager.Queries
             public string StatusName { get; set; }
             public Guid? AcceptedById { get; set; }
             public string AcceptedByName { get; set; }
+            public bool IsHighlight { get; set; }
         }
         public class Query : IRequest<ResponseModel<DetailPostManager>>
         {

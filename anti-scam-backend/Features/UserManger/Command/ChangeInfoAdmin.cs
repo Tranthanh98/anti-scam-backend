@@ -32,7 +32,6 @@ namespace anti_scam_backend.Features.UserManger.Command
             [FromBody]
             public int TotalPostsReputation { get; set; }
             [FromBody]
-
             public bool IsActive { get; set; }
             [FromBody]
             public List<int> AdminRoles { get; set; }
@@ -44,7 +43,7 @@ namespace anti_scam_backend.Features.UserManger.Command
         {
             private AntiScamContext _context;
             private IEmailService _emailService;
-            public Handler(AntiScamContext context, IMapper mapper, IEmailService emailService)
+            public Handler(AntiScamContext context, IEmailService emailService)
             {
                 _context = context;
                 _emailService = emailService;
@@ -89,20 +88,23 @@ namespace anti_scam_backend.Features.UserManger.Command
 
                     var hashPw = HashPasswordService.HashPassword(new Domain.Entities.User(), request.Password + salt);
 
+                    user.Salt = salt;
                     user.Password = hashPw;
                     await _context.SaveChangesAsync(cancellationToken);
 
                     if (editer.Email != "antiscam.contact@gmail.com")
                     {
-                        var subject = "[Anti-scam - Thông báo thay đổi mật khẩu admin]";
+                        var subject = "[AntiScam - Thông báo thay đổi mật khẩu admin]";
                         var message = $"<h2>User {editer.Email} đã thay đổi mật khẩu cho admin {user.Email}</h2><div>Mật khẩu mới được thay đổi là: <div style='font - size:20px; color: red; font - weight:bold'>{request.Password}</div></div>";
 
                         await _emailService.SendEmailAsync("antiscam.contact@gmail.com", subject, message);
 
                     }
                 }
-
-
+                else
+                {
+                    await _context.SaveChangesAsync(cancellationToken);
+                }
                 ack.IsSuccess = true;
                 return ack;
             }

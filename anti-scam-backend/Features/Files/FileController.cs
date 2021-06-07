@@ -78,7 +78,7 @@ namespace anti_scam_backend.Features.Files
             return response;
         }
         [HttpGet]
-        [Authorize]
+        [Authorize(Roles = "Admin, SystemManager")]
         public async Task<ResponseModel> DeleteFileUnUsage()
         {
             var response = await _mediator.Send(new DeleteFileUnUsage.Command(), default);

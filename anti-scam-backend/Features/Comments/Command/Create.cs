@@ -1,6 +1,7 @@
 ﻿using anti_scam_backend.Domain.Infrastructure;
 using anti_scam_backend.Features.Comments.Queries;
 using anti_scam_backend.Model;
+using anti_scam_backend.Services.Helper;
 using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -53,6 +54,7 @@ namespace anti_scam_backend.Features.Comments.Command
                     };
                 }
                 //add comment
+                request.Content = StringHelper.RemoveBadWord(request.Content);
                 var comment = _mapper.Map<Domain.Entities.Comment>(request);
                 _context.Comments.Add(comment);
                 await _context.SaveChangesAsync();

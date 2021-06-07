@@ -79,5 +79,13 @@ namespace anti_scam_backend.Features.PostManager
             var result = await _mediator.Send(command, default);
             return result;
         }
+
+        [HttpPost]
+        [Authorize(Roles = "ContentManger")]
+        public async Task<ResponseModel> SetHighlight(SetHighlightPost.Command command)
+        {
+            var result = await _mediator.Send(command, default);
+            return result;
+        }
     }
 }
