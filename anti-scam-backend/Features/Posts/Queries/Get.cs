@@ -90,6 +90,11 @@ namespace anti_scam_backend.Features.Posts.Queries
 
                 var result = _mapper.Map<List<PostModel>>(data);
 
+                result.ForEach(i =>
+                {
+                    i.TypePosts.ForEach(j => j.Posts = null);
+                });
+
                 return new ResponseModel<Pagination<PostModel>>()
                 {
                     IsSuccess = true,

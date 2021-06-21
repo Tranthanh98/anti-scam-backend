@@ -58,6 +58,8 @@ namespace anti_scam_backend.Features.Posts.Queries
                 var imageList = post.Images.Select(i => request.BaseUrl + "/api/file/getfilebyid/" + i.Id).ToList();
 
                 data.ImageList = imageList;
+
+                data.TypePosts.ForEach(i => i.Posts = null);
                 ack.Data = data;
                 ack.IsSuccess = true;
                 return ack;
