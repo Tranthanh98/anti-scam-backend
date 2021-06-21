@@ -38,7 +38,7 @@ namespace anti_scam_backend.Features.Posts.Queries
             {
                 var ack = new ResponseModel<DetailPost>();
                 var post = await _context.Posts
-                    .Where(i => i.Id == request.PostId)
+                    .Where(i => i.Id == request.PostId && i.Status == Domain.Model.EStatusPost.Accepted)
                     .Include(i => i.User)
                     .Include(i => i.Comments)
                     .Include(i => i.Images)
