@@ -37,6 +37,7 @@ namespace anti_scam_backend.Features.Posts.Queries
             public int TypeId { get; set; }
             public int SortType { get; set; }
             public int KindOfValue { get; set; }
+            public bool IsMine { get; set; }
         }
         public class Query : BaseCommandQuery<ResponseModel<Pagination<PostModel>>>
         {
@@ -55,6 +56,9 @@ namespace anti_scam_backend.Features.Posts.Queries
             }
             public async Task<ResponseModel<Pagination<PostModel>>> Handle(Query request, CancellationToken cancellationToken)
             {
+                Guid userId;
+                Guid.TryParse(request.UserId, out userId);
+
                 var posts = _context.Posts
                     .AsNoTracking()
                     .Where(i=> (int)i.KindOf == request.SearchModel.KindOfValue && i.Status == Domain.Model.EStatusPost.Accepted)
@@ -64,6 +68,11 @@ namespace anti_scam_backend.Features.Posts.Queries
                     .ThenInclude(i => i.Type)
                     .OrderByDescending(i=> i.CreatedDate)
                     .AsEnumerable();
+
+                if (request.SearchModel.IsMine)
+                {
+                    posts = posts.Where(i => i.CreatedById == userId);
+                }
 
                 if (request.SearchModel.TypeId != default)
                 {

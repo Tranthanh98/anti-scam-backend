@@ -18,7 +18,7 @@ namespace anti_scam_backend.Features.Users
 
             //Detail query
             CreateMap<User, Detail.UserProfile>()
-                .ForMember(d => d.TotalPosts, o => o.MapFrom(s => s.Posts.Count));
+                .ForMember(d => d.TotalPosts, o => o.MapFrom(s => s.Posts.Where(i=> i.Status == Domain.Model.EStatusPost.Accepted).Count()));
         }
     }
 }

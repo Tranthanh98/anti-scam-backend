@@ -36,6 +36,9 @@ namespace anti_scam_backend.Features.Posts
         [HttpPost]
         public async Task<ResponseModel<Pagination<Queries.Get.PostModel>>> GetPosts(Queries.Get.Query query)
         {
+            StringValues userId;
+            Request.Headers.TryGetValue("X-UserId", out userId);
+            query.UserId = userId;
             var result = await _mediator.Send(query, default);
             return result;
         }

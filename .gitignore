@@ -2,3 +2,7 @@ anti-scam-backend/bin/
 anti-scam-backend/obj/
 Antiscam.Test/
 anti-scam-backend/Properties/PublishProfiles/
+.vs/anti-scam-backend/DesignTimeBuild/.dtbcache.v2
+.vs/anti-scam-backend/v16/.suo
+.vs/anti-scam-backend/v16/TestStore/
+anti-scam-backend/anti-scam-backend.csproj.user
