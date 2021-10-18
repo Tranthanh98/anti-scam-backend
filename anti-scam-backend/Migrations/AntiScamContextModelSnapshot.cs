@@ -189,22 +189,22 @@ namespace anti_scam_backend.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("57099f1e-99c0-43a8-a9a2-721fc1aeeacf"),
+                            UserId = new Guid("8ed1e886-4cf9-494c-ba64-955a7e781827"),
                             RoldId = 1
                         },
                         new
                         {
-                            UserId = new Guid("57099f1e-99c0-43a8-a9a2-721fc1aeeacf"),
+                            UserId = new Guid("8ed1e886-4cf9-494c-ba64-955a7e781827"),
                             RoldId = 2
                         },
                         new
                         {
-                            UserId = new Guid("20924cd5-bd2a-4375-a45f-c5299ef3ac02"),
+                            UserId = new Guid("5c01f99e-8db9-4947-869a-14b711167611"),
                             RoldId = 1
                         },
                         new
                         {
-                            UserId = new Guid("20924cd5-bd2a-4375-a45f-c5299ef3ac02"),
+                            UserId = new Guid("5c01f99e-8db9-4947-869a-14b711167611"),
                             RoldId = 2
                         });
                 });
@@ -312,24 +312,24 @@ namespace anti_scam_backend.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("57099f1e-99c0-43a8-a9a2-721fc1aeeacf"),
+                            Id = new Guid("8ed1e886-4cf9-494c-ba64-955a7e781827"),
                             CodeValidate = "123456",
                             Email = "Trantienthanh2412@gmail.com",
                             IsActive = true,
                             IsAdmin = true,
-                            JoinedDate = new DateTimeOffset(new DateTime(2021, 6, 6, 9, 38, 50, 58, DateTimeKind.Unspecified).AddTicks(8727), new TimeSpan(0, 0, 0, 0, 0)),
+                            JoinedDate = new DateTimeOffset(new DateTime(2021, 7, 5, 14, 5, 48, 973, DateTimeKind.Unspecified).AddTicks(3290), new TimeSpan(0, 0, 0, 0, 0)),
                             Password = "AQAAAAEAACcQAAAAEBAPlUdwTj0sci7gABciifU0cXR+sD/GUUtK99iAzlEcmqzuCE4Z8TflzHN9Nv6+KQ==",
                             Salt = "pscznq",
                             UserName = "Admin"
                         },
                         new
                         {
-                            Id = new Guid("20924cd5-bd2a-4375-a45f-c5299ef3ac02"),
+                            Id = new Guid("5c01f99e-8db9-4947-869a-14b711167611"),
                             CodeValidate = "123456",
                             Email = "antiscam.contact@gmail.com",
                             IsActive = true,
                             IsAdmin = true,
-                            JoinedDate = new DateTimeOffset(new DateTime(2021, 6, 6, 9, 38, 50, 59, DateTimeKind.Unspecified).AddTicks(2081), new TimeSpan(0, 0, 0, 0, 0)),
+                            JoinedDate = new DateTimeOffset(new DateTime(2021, 7, 5, 14, 5, 48, 973, DateTimeKind.Unspecified).AddTicks(9660), new TimeSpan(0, 0, 0, 0, 0)),
                             Password = "AQAAAAEAACcQAAAAEBAPlUdwTj0sci7gABciifU0cXR+sD/GUUtK99iAzlEcmqzuCE4Z8TflzHN9Nv6+KQ==",
                             Salt = "pscznq",
                             UserName = "Admin"

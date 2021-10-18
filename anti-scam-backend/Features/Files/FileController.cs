@@ -66,7 +66,7 @@ namespace anti_scam_backend.Features.Files
         public async Task<ResponseModel> DeleteFile(int id)
         {
             StringValues userId;
-            HttpContext.Request.Headers.TryGetValue("UserId", out userId);
+            Request.Headers.TryGetValue("X-UserId", out userId);
             var response = await _mediator.Send(new Delete.Command() { Id = id, UserId = userId }, default);
             return response;
         }
