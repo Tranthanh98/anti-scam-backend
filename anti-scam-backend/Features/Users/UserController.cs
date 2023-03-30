@@ -75,5 +75,12 @@ namespace anti_scam_backend.Features.Users
             var result = await _mediator.Send(command, default);
             return result;
         }
+
+        [HttpPost("login-google")]
+        [AllowAnonymous]
+        public async Task LoginGoogle()
+        {
+
+        }
     }
 }

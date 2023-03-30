@@ -6,6 +6,7 @@
     <UserSecretsId>333b378e-98e8-4988-b4a5-2de1584f2e94</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' " />
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
@@ -31,7 +32,13 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.11.1" />
     <PackageReference Include="System.Runtime.Serialization.Json" Version="4.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.32" />
+    <PackageReference Include="Google.Apis.Auth" Version="1.35.1" />
   </ItemGroup>
 
 
+  <ItemGroup>
+    <None Remove="Microsoft.AspNetCore.Authentication.Google" />
+    <None Remove="Google.Apis.Auth" />
+  </ItemGroup>
 </Project>

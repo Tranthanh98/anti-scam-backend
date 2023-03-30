@@ -79,14 +79,26 @@ namespace anti_scam_backend
 
             });
 
+            //google authentication
+
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+
+                googleOptions.SignInScheme = Microsoft.AspNetCore.Identity.IdentityConstants.ExternalScheme;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AntiScamContext context)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                context.Database.Migrate();
             }
 
             app.UseRouting();

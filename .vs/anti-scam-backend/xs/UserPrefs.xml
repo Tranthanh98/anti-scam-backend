@@ -1,0 +1,33 @@
+﻿<Properties StartupConfiguration="{B6B569E1-C495-402B-915C-44913A84155B}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="anti-scam-backend/Features/Users/UserController.cs">
+    <Files>
+      <File FileName="anti-scam-backend/Startup.cs" Line="88" Column="1" />
+      <File FileName="anti-scam-backend/Features/Users/UserController.cs" Line="81" Column="39" />
+      <File FileName="anti-scam-backend/Controllers/WeatherForecastController.cs" />
+      <File FileName="anti-scam-backend/client_secret_897567384173-rqc5id46ujmvf8es4fhla2ptt96i6v50.apps.googleusercontent.com.json" />
+      <File FileName="anti-scam-backend/appsettings.json" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="anti-scam-backend" expanded="True">
+            <Node name="anti-scam-backend" expanded="True" selected="True">
+              <Node name="Features" expanded="True">
+                <Node name="Users" expanded="True">
+                  <Node name="Command" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.anti-scam-backend PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
